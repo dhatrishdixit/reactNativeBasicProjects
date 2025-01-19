@@ -8,7 +8,7 @@ export function AppPro(): React.JSX.Element{
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={isDarkMode ? styles.whiteText : styles.darkText}>hey there this from AppPro </Text>
+            <Text style={isDarkMode ? styles.whiteText : styles.darkText}>hey there this from AppPro hi </Text>
         </SafeAreaView>
     )
 }
