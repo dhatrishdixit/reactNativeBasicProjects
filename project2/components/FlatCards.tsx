@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     headingText:{
          fontSize:24,
          fontWeight: 'bold',
-         paddingHorizontal: 8,
+         padding: 8,
          color: "white"
     },
     cardHeading:{
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
          borderRadius:10,
          justifyContent:"center",
          alignItems:"center",
-         margin:8
+         margin:8,
+         elevation:4
     },
     cardOne:{
          backgroundColor:"#CC3363"
