@@ -8,7 +8,7 @@ import FancyCard from "./components/fancyCard";
 function App(){
      return(
       <SafeAreaView style={styles.mainContainer}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
            <Text style={styles.headingText}> Hello </Text>
            <FlatCards/>
            <ElevatedCards/>

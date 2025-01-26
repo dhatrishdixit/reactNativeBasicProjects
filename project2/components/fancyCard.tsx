@@ -16,7 +16,11 @@ function FancyCard(){
                 <View style={styles.cardBody}>
                     <Text style={styles.cardTitle}>Lorem ipsum </Text>
                     <Text style={styles.cardLabel}>Lorem ipsum dolor sit amet consectetur adipisicing elit</Text>
-                    <Text style={styles.cardDescription}> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam quam veniam veritatis ut fugit, cupiditate labore ipsam sunt vel. Voluptatibus non incidunt at quaerat quos consectetur cumque eligendi sint rerum! </Text>
+                    <Text style={styles.cardDescription}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam quam veniam veritatis ut fugit </Text>
+                      <View style={styles.footerStyle}>
+                      <Text style={styles.footer}>This is footer </Text>
+                      </View>
+                    
                 </View>
             </View>
 
@@ -26,15 +30,6 @@ function FancyCard(){
 
 
 const styles = StyleSheet.create({
-      cardTitle:{
-        color:"white"
-      },
-      cardLabel:{
-        color:"white"
-      },
-      cardDescription:{
-        color:"white"
-      },
       headingText:{
         color:"white",
         fontSize:24,
@@ -43,14 +38,55 @@ const styles = StyleSheet.create({
       container:{
         margin:8
       },
-      card:{},
-      cardElevated:{},
+      card:{
+        width:280,
+        borderRadius:6,
+      },
+      cardElevated:{
+        backgroundColor:"#FFFFFF",
+        elevation:4,
+        shadowOffset:{
+          width:1,
+          height:1
+        }
+      },
       cardBody:{
-
+        flex:1,
+        flexGrow:1,
+        paddingHorizontal:12
       },
       cardImage:{
         height:280,
-        width:280
+        width:280,
+        marginBottom:8,
+        borderTopLeftRadius:6,
+        borderTopRightRadius:6
+      },
+      cardTitle:{
+        color:"black",
+        fontSize:22,
+        fontWeight:"bold",
+        marginBottom:4,
+      },
+      cardLabel:{
+        color:"black",
+        fontSize:14,
+        marginBottom:6
+      },
+      cardDescription:{
+        color:"black",
+        fontSize:12,
+        marginBottom:12
+      },
+      footer:{
+        color:"black",
+      
+      },
+      footerStyle:{
+        flex:1,
+        width:"100%",
+        alignItems:"flex-end",
+        marginBottom:8
       }
 });
 
