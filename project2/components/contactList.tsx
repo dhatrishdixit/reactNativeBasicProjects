@@ -1,5 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { compatibilityVersion } from 'drizzle-orm/version';
+
+interface User {
+	name: string;
+	email: string;
+	text: string;
+	company: string;
+}
 
 const data = [
 	{
@@ -36,14 +44,53 @@ const data = [
 
 export default function ContactList() {
   return (
-    <View>
-      <Text style={styles.headingText}>contactList</Text>
+    <View style={styles.container}>
+      <Text style={styles.headingText}>Contact List</Text>
+	  <ScrollView style={styles.scrollContainer}>
+           {data.map((user:User,ind)=>{
+			  return(
+			    <View style={styles.cardContainer} key={ind}>
+				  <Text style={styles.indText}>{ind}</Text> 
+                  <Text style={styles.nameText}>{user.name}</Text>
+				  <Text style={styles.companyText}>{user.company}</Text> 
+				  <Text style={styles.emailText}>{user.email}</Text> 
+				  <Text style={styles.basicText}>{user.text}</Text>   
+			    </View>
+			  )
+		   })}
+	  </ScrollView>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
     headingText:{
-        color:"white"
-    }
+        color:"white",
+		fontSize:24,
+		fontWeight:"bold"
+    },
+	container:{
+		margin:8,
+	},
+	scrollContainer:{
+
+	},
+	cardContainer:{
+		
+	},
+	indText:{
+		color:"white",
+	},
+	nameText:{
+		color:"white",
+	},
+	companyText:{
+		color:"white",
+	},
+	emailText:{
+		color:"white",
+	},
+	basicText:{
+		color:"white",
+	}
 })
