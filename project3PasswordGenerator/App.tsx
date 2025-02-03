@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React,{useState} from 'react';
 
 import * as yup from "yup";
@@ -67,9 +67,11 @@ export default function App() {
   }
 
   return (
+    <ScrollView keyboardShouldPersistTaps="handled">
     <SafeAreaView>
       <Text>App</Text>
     </SafeAreaView>
+    </ScrollView>
   )
 }
 
