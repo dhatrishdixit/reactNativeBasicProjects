@@ -1,6 +1,6 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React,{useState} from 'react';
-
+import { Formik } from 'formik';
 import * as yup from "yup";
 
 const passwordSchema = yup.object().shape({
@@ -69,7 +69,31 @@ export default function App() {
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
     <SafeAreaView>
-      <Text>App</Text>
+    <Formik
+     initialValues={{ passwordLength: '' }}
+     validationSchema={passwordSchema}
+     onSubmit={values => {
+        console.log(values);
+        generatePasswordString(Number(values.passwordLength));
+     }}
+   >
+     {({ 
+        values,
+        errors,
+        touched,
+        isValid,
+        handleChange,
+        handleReset,
+        handleSubmit
+      }) => (
+       <View>
+         <TextInput
+    
+         />
+         <Button onPress={handleSubmit} title="Submit" />
+       </View>
+     )}
+   </Formik>
     </SafeAreaView>
     </ScrollView>
   )
