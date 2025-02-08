@@ -2,6 +2,7 @@ import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, Touchabl
 import React,{useState} from 'react';
 import { Formik } from 'formik';
 import * as yup from "yup";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const passwordSchema = yup.object().shape({
   passwordLength: yup.number()
@@ -109,10 +110,39 @@ export default function App() {
              />
            </View>
          </View>
-         <View style={styles.inputWrapper}></View>
-         <View style={styles.inputWrapper}></View>
-         <View style={styles.inputWrapper}></View>
-         <View style={styles.inputWrapper}></View>
+         <View style={styles.inputWrapper}>
+          <Text style={[styles.heading]}>Include Lowercase</Text>
+          <BouncyCheckbox
+           isChecked={lowerCase}
+           onPress={()=>setLowerCase(prev => !prev)}
+           fillColor='#29Ab87'
+          />
+          
+         </View>
+         <View style={styles.inputWrapper}>
+         <Text style={styles.heading}>Include Lowercase</Text>
+          <BouncyCheckbox
+           isChecked={lowerCase}
+           onPress={()=>setLowerCase(prev => !prev)}
+           fillColor='#29Ab87'
+          />
+         </View>
+         <View style={styles.inputWrapper}>
+         <Text style={styles.heading}>Include Lowercase</Text>
+          <BouncyCheckbox
+           isChecked={lowerCase}
+           onPress={()=>setLowerCase(prev => !prev)}
+           fillColor='#29Ab87'
+          />
+         </View>
+         <View style={styles.inputWrapper}>
+         <Text style={styles.heading}>Include Lowercase</Text>
+          <BouncyCheckbox
+           isChecked={lowerCase}
+           onPress={()=>setLowerCase(prev => !prev)}
+           fillColor='#29Ab87'
+          />
+         </View>
 
          <View style={styles.formActions}>
             <TouchableOpacity><Text>Generate Password</Text></TouchableOpacity>
@@ -156,9 +186,10 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     marginBottom: 15,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexDirection: 'row',
+    width:"100%"
   },
   inputRow: {
     flexDirection: 'row',
