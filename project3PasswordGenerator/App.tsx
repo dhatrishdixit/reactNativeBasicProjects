@@ -1,4 +1,4 @@
-import { Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { GestureResponderEvent, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React,{useState} from 'react';
 import { Formik } from 'formik';
 import * as yup from "yup";
@@ -92,7 +92,7 @@ export default function App() {
       }) => (
        <>
          <View style={styles.inputWrapper}>
-           <View style={styles.inputRow}>
+           <View style={styles.inputColumn}>
             <Text style={styles.heading}>Password Length</Text>
             {
               touched?.passwordLength && errors?.passwordLength ? (<Text style={styles.errorText}>   
@@ -101,14 +101,15 @@ export default function App() {
                :
                 null
         }
-             <TextInput
+             
+           </View>
+           <TextInput
                style={styles.inputStyle}
                value={values.passwordLength}
                onChangeText={handleChange('passwordLength')} 
                placeholder="ex. 8"
-               keyboardType="numeric"           
+               keyboardType="numeric"
              />
-           </View>
          </View>
          <View style={styles.inputWrapper}>
           <Text style={[styles.heading]}>Include Lowercase</Text>
@@ -152,7 +153,7 @@ export default function App() {
             <TouchableOpacity
              disabled={!isValid}
              style={styles.primaryBtn}
-             onPress={handleSubmit}
+             onPress={handleSubmit as (e?: GestureResponderEvent) => void}
             ><Text style={styles.primaryBtnTxt}>Generate Password</Text></TouchableOpacity>
             <TouchableOpacity
              style={styles.secondaryBtn}
@@ -172,7 +173,7 @@ export default function App() {
            <Text style={styles.subTitle}>Result : </Text>
            <Text style={styles.description}>Long Press Password Text to copy </Text>
            <Text selectable={true} style={styles.generatedPassword}>{password}</Text>
-        </View>) :null
+        </View>) : null
       }
     </SafeAreaView>
     </ScrollView>
@@ -204,7 +205,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 15,
-    color:"white"
+    color:"white",
+    flexDirection: 'column'
   },
   inputWrapper: {
     marginBottom: 15,
@@ -213,11 +215,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width:"100%"
   },
-  inputRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems:'center',
-    width: '100%'
+  inputColumn: {
+    flexDirection: 'column',
   },
   inputStyle: {
     padding: 8,
@@ -225,6 +224,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     borderColor: '#16213e',
+    color:"white"
   },
   errorText: {
     fontSize: 12,
