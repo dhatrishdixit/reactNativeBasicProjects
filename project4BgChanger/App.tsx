@@ -42,19 +42,20 @@ function App(): React.JSX.Element {
     <SafeAreaView >
      <StatusBar translucent backgroundColor="transparent" />
       <View style={[styles.background,{backgroundColor:colorBackground}]}>
-        <View style={[styles.rectangle,{backgroundColor:colorOne}]}>
-
-        </View>
+        <View style={[styles.container]}>
+        <View style={[styles.rectangle,{backgroundColor:colorOne}]}></View>
         <View style={[styles.circle,{backgroundColor:colorTwo}]}></View>
         <View style={[styles.square,{backgroundColor:colorThree}]}></View>
         <View style={[styles.shapeFour,{backgroundColor:colorFour}]}></View>
+        </View>
 
+      <View style={styles.container}>
       <TouchableOpacity onPress={randomiseColor} style={styles.button}>
         <Text>
           click to change the color           
         </Text>
         </TouchableOpacity>
-
+      </View>
       </View>
       
     </SafeAreaView>
@@ -63,6 +64,7 @@ function App(): React.JSX.Element {
 
 const styles = StyleSheet.create({
     background:{ 
+       padding:30,
        flexDirection:"column",
        width:"100%",
        height:"100%",
@@ -86,9 +88,18 @@ const styles = StyleSheet.create({
       borderRadius:20,
     },
     button:{
-      width:50,
-      height:20,
-      backgroundColor:"white"
+      alignSelf: 'flex-start',
+      height:40,
+      backgroundColor:"white",
+      opacity:0.6,
+      borderRadius:10,
+      padding:10,
+    },
+    container:{
+      flexDirection:"row",
+      justifyContent:"space-evenly",
+      alignItems:"center",
+      padding:20  
     }
 });
 
