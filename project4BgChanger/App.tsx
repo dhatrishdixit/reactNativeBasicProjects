@@ -7,22 +7,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  useColorScheme,
-  View,
+  View
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
 
 function App(): React.JSX.Element {
   
@@ -38,7 +24,6 @@ function App(): React.JSX.Element {
   }
 
   const [colorBackground,setColorBackground] =  useState<string>("#000000");
-
   const [colorOne,setColorOne] =  useState<string>("#000000");
   const [colorTwo,setColorTwo] =  useState<string>("#000000");
   const [colorThree,setColorThree] =  useState<string>("#000000");
@@ -55,7 +40,7 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView >
-      <StatusBar backgroundColor={"#000000"}/>
+     <StatusBar translucent backgroundColor="transparent" />
       <View style={[styles.background,{backgroundColor:colorBackground}]}>
         <View style={[styles.rectangle,{backgroundColor:colorOne}]}>
 
@@ -64,7 +49,7 @@ function App(): React.JSX.Element {
         <View style={[styles.square,{backgroundColor:colorThree}]}></View>
         <View style={[styles.shapeFour,{backgroundColor:colorFour}]}></View>
 
-      <TouchableOpacity onPress={randomiseColor}>
+      <TouchableOpacity onPress={randomiseColor} style={styles.button}>
         <Text>
           click to change the color           
         </Text>
@@ -77,9 +62,10 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-    background:{
-       flex:1,
-       flexDirection:"column"
+    background:{ 
+       flexDirection:"column",
+       width:"100%",
+       height:"100%",
     },
     rectangle:{
       width:40,
@@ -98,6 +84,11 @@ const styles = StyleSheet.create({
       width:40,
       height: 20,
       borderRadius:20,
+    },
+    button:{
+      width:50,
+      height:20,
+      backgroundColor:"white"
     }
 });
 
