@@ -1,117 +1,89 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Image,
+  ImageSourcePropType,
+  Pressable,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Dice1 from "../assets/dice-six-faces-one.png";
+import Dice2 from "../assets/dice-six-faces-two.png";
+import Dice3 from "../assets/dice-six-faces-three.png";
+import Dice4 from "../assets/dice-six-faces-four.png";
+import Dice5 from "../assets/dice-six-faces-five.png";
+import Dice6 from "../assets/dice-six-faces-six.png";
 
-type SectionProps = PropsWithChildren<{
-  title: string;
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+
+type DiceProps = PropsWithChildren<{
+  ImageUrl: ImageSourcePropType;
 }>;
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function Dice({ImageUrl}:DiceProps) :React.JSX.Element{
+   return (
+     <View>
+        <Image style={styles.diceImage} source={ImageUrl}/>
+     </View>
+   )
+}
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const DiceImages = [Dice1,Dice2,Dice3,Dice4,Dice5,Dice6]
+
+function App(): React.JSX.Element {
+  
+  const [diceImage,setDiceImage] = React.useState<ImageSourcePropType>(Dice6);
+
+  function RollDice(){
+    let randomNumber= Math.floor(Math.random()*6);
+    
+    setDiceImage(DiceImages[randomNumber]);
+    console.log(diceImage)
+    ReactNativeHapticFeedback.trigger("impactLight",options)
+  }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <Dice ImageUrl={diceImage}/>
+      <Pressable onPress={RollDice}>
+        <Text style={styles.rollDiceBtnText}>Roll Dice</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFF2F2',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  diceContainer: {
+    margin: 12,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  diceImage: {
+    width: 200,
+    height: 200,
   },
-  highlight: {
+  rollDiceBtnText: {
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderWidth: 2,
+    borderRadius: 8,
+    borderColor: '#E5E0FF',
+    fontSize: 16,
+    color: '#8EA7E9',
     fontWeight: '700',
+    textTransform: 'uppercase',
   },
 });
 
