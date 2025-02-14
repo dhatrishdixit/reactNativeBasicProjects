@@ -53,9 +53,12 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <Dice ImageUrl={diceImage}/>
-      <Pressable onPress={RollDice}>
-        <Text style={styles.rollDiceBtnText}>Roll Dice</Text>
-      </Pressable>
+      <View style={styles.diceContainer}>
+          <Pressable onPress={RollDice}>
+          <Text style={styles.rollDiceBtnText}>Roll Dice</Text>
+          </Pressable>
+      </View>
+    
     </SafeAreaView>
   );
 }
