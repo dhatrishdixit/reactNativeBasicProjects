@@ -1,4 +1,4 @@
-package com.project6currency
+package com.prject6currency
 
 import android.app.Application
 import com.facebook.react.PackageList

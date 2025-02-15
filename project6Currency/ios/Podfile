@@ -14,7 +14,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'project6Currency' do
+target 'prject6Currency' do
   config = use_native_modules!
 
   use_react_native!(

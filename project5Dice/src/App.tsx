@@ -40,20 +40,29 @@ const DiceImages = [Dice1,Dice2,Dice3,Dice4,Dice5,Dice6]
 
 function App(): React.JSX.Element {
   
-  const [diceImage,setDiceImage] = React.useState<ImageSourcePropType>(Dice6);
+  const [diceImageOne,setDiceImageOne] = React.useState<ImageSourcePropType>(Dice6);
+  const [diceImageTwo,setDiceImageTwo] = React.useState<ImageSourcePropType>(Dice6);
+  const [totalCount,setTotalCount] = React.useState<number>(0);
 
   function RollDice(){
-    let randomNumber= Math.floor(Math.random()*6);
+    const randomNumberOne= Math.floor(Math.random()*6);
+    const randomNumberTwo= Math.floor(Math.random()*6);
     
-    setDiceImage(DiceImages[randomNumber]);
-    console.log(diceImage)
-    ReactNativeHapticFeedback.trigger("impactLight",options)
+    setDiceImageOne(DiceImages[randomNumberOne]);
+    setDiceImageTwo(DiceImages[randomNumberTwo]);
+    setTotalCount(randomNumberOne+randomNumberTwo+2);
+    console.log(diceImageOne)
+    ReactNativeHapticFeedback.trigger("impactHeavy",options)
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Dice ImageUrl={diceImage}/>
-      <View style={styles.diceContainer}>
+        <Text style={styles.totalCount}>{totalCount == 0 ? "Let's Start":`You Got : ${totalCount}`}</Text>
+        <View style={styles.diceContainer}>
+        <Dice ImageUrl={diceImageOne}/>
+        <Dice ImageUrl={diceImageTwo}/>
+        </View>
+      <View style={styles.btnContainer}>
           <Pressable onPress={RollDice}>
           <Text style={styles.rollDiceBtnText}>Roll Dice</Text>
           </Pressable>
@@ -64,27 +73,36 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  totalCount:{
+    fontSize:20,
+    fontWeight:'bold',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFF2F2',
+    gap:10
   },
-  diceContainer: {
+  diceContainer:{
+    flexDirection:'row',
+    gap:10
+  },
+  btnContainer: {
     margin: 12,
   },
   diceImage: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
   },
   rollDiceBtnText: {
     paddingVertical: 10,
     paddingHorizontal: 40,
     borderWidth: 2,
     borderRadius: 8,
-    borderColor: '#E5E0FF',
+    borderColor: 'black',
     fontSize: 16,
-    color: '#8EA7E9',
+    color: 'black',
     fontWeight: '700',
     textTransform: 'uppercase',
   },
