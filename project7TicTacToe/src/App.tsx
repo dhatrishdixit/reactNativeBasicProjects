@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { SafeAreaView, Text, StyleSheet, View, FlatList } from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, FlatList, Pressable } from "react-native";
 
 import Snackbar from 'react-native-snackbar';
 import Icons from "./components/icons";
@@ -21,7 +21,7 @@ export const App = () => {
     setGameState(new Array(9).fill(0));
   }
 
-  const checkGameState = () => {
+  const checkWinner = () => {
 
     // check for winner in rows 
       if(gameState[0] == gameState[1] && gameState[1] == gameState[2] && gameState[0] != 0) setWinner(gameState[0]);
@@ -40,30 +40,82 @@ export const App = () => {
   }
 
   const onChange = (indexNum : number) => {
-      
+      if(winner){
+        Snackbar.show({
+          text: `Player ${winner} has already won the game , click on reset to start a new game`,
+          textColor: 'white',
+          backgroundColor: '#333'
+        })
+      }
+
+      if(gameState[indexNum] ==  0){
+         setGameState((prev) => {
+            let newGameState = [...prev];
+            newGameState[indexNum] = turn;
+            return newGameState;
+         })
+         setTurn(prev => prev == 1 ? 2  : 1);
+      }
+      else{
+        Snackbar.show({
+          text: 'This box is already filled , click on another one',
+          textColor: 'white',
+          backgroundColor: '#333'
+        })
+      }
+
+      checkWinner();
   }
 
   return (
     
     <SafeAreaView style={styles.container}>
-     (
-      winner == null ?  <View style={styles.contentContainer}>
+    
       <Text style={styles.heading}>Tic - Tac - Toe</Text>
       <View style={styles.turnContainer}>
         <View style={[styles.textWrapper,{backgroundColor : turn == 1 ? '#08B2E3':'#D10000'}]}>
-        <Text style={styles.turnText}> 
-          Player {turn}'s Turn
-        </Text>
+         
+          {
+            winner == null ?
+            <Text style={styles.turnText}> {`Player ${turn}'s Turn`} </Text>
+            : 
+            <View>
+              <Text style={styles.turnText}> {`Player ${turn} has won !!`} </Text>
+              <Pressable
+               onPress={reloadGame}
+               style={styles.resetBtn}
+              >
+                <Text
+                 style={styles.resetBtnText}
+                >Restart Game</Text>
+              </Pressable>
+            </View>
+          }
+       
         </View>
         
       </View>
-    
-      </View> 
-      : 
-      <View>
-           
-      </View> 
-     )
+      <View style={styles.gameContainer}>
+      <FlatList
+       numColumns={3}
+       data = {gameState}
+       keyExtractor={(item,index)=>index.toString()}
+       renderItem = {
+         ({item,index})=>{
+            console.log(`${index} : ${item}`);
+            return (
+              <Pressable
+               key={index}
+               style={styles.card}
+               onPress={()=>onChange(index)}
+              >
+                <Icons name={item} />
+              </Pressable>
+            )
+         }
+       }
+      />
+     </View>
     </SafeAreaView>
   
   );
@@ -72,6 +124,33 @@ export const App = () => {
 const styles = StyleSheet.create({
   contentContainer:{
 
+  },
+  gameContainer:{
+    marginVertical:20,
+  },
+  resetBtn:{
+    borderColor : 'white',
+    borderWidth : 2 ,
+    width:"60%",
+    alignSelf:'center',
+    marginVertical:10,
+    borderRadius:10
+  },
+  card: {
+    height: 100,
+    width: '33.33%',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    borderWidth: 1,
+    borderColor: '#333',
+  },
+  resetBtnText:{
+    color:'white',
+    fontSize:16,
+    textAlign:'center',
+    margin:10
   },
   container: {
     flex: 1,
