@@ -6,7 +6,7 @@ import {
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator  } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Screens
 import Home from './src/screens/Home';
@@ -17,7 +17,7 @@ export type RootStackParamList = {
   Details:{productId :string}
 }
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
 
