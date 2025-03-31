@@ -1,12 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../App'
+
+type HomeProps = NativeStackScreenProps<RootStackParamList,'Home'>;
 
 
-const Home = () => {
+
+const Home = ({navigation}:HomeProps) => {
+
+  console.log(navigation);
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.smallText}>Home</Text>
+      <Text style={styles.headingText}>Home Screen</Text>
+      <Button
+       title="Go to Details"
+      //  onPress={()=>navigation.navigate('Details',{
+      //    productId:'123'
+      //  })}
+
+      onPress={()=>navigation.push('Details',{
+        productId:'123'
+      })}
+
+      // push adds multiple screens to the stack .
+      />
+
+
     </View>
   )
 }
@@ -19,7 +42,9 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    smallText:{
-        color:'white'
-    }
+    headingText: {
+      color: 'white',
+      fontSize: 20,
+      textAlign: "center" as "center",
+    },
 })
