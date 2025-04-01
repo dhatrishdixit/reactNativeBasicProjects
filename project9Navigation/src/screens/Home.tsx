@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     headingText: {
-      color: 'white',
+      color: 'black',
       fontSize: 20,
       textAlign: "center" as "center",
     },
