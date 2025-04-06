@@ -97,7 +97,7 @@ class AppwriteService {
 
     async logout(){
         try {
-            await this.account.deleteSessions();
+            await this.account.deleteSession('current');
         } catch (error) {
             Snackbar.show({
                 text:String(error),
@@ -107,3 +107,5 @@ class AppwriteService {
         }
     }
 }
+
+export default AppwriteService;
