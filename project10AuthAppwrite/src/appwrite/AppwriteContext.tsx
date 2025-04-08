@@ -1,6 +1,8 @@
 import { createContext , useContext ,FC ,PropsWithChildren, useState } from "react";
 import Appwrite from "./service";
 
+const AppwriteObj = new Appwrite();
+
 export type AppwriteContextType = {
     appwrite: Appwrite;
     // here we are defining the appwrite will be an instance of the Appwrite class
@@ -10,7 +12,7 @@ export type AppwriteContextType = {
 
 const AppwriteContext = createContext<AppwriteContextType>(
     {
-        appwrite: new Appwrite(),
+        appwrite: AppwriteObj,
         isLoggedIn: false,
         setIsLoggedIn: () => {}
 
@@ -22,7 +24,7 @@ export const AppwriteProvider : FC<PropsWithChildren> = ({children})=>{
     const [isLoggedIn,setIsLoggedIn] = useState(false);
 
     const defaultState = {
-        appwrite : new Appwrite(),
+        appwrite : AppwriteObj,
         isLoggedIn,
         setIsLoggedIn
     }
